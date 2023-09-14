@@ -1,0 +1,14 @@
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\bin\Debug\net6.0\FlowExercise.exe
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\bin\Debug\net6.0\FlowExercise.deps.json
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\bin\Debug\net6.0\FlowExercise.runtimeconfig.json
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\bin\Debug\net6.0\FlowExercise.dll
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\bin\Debug\net6.0\FlowExercise.pdb
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.AssemblyInfoInputs.cache
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.AssemblyInfo.cs
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.csproj.CoreCompileInputs.cache
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.dll
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\refint\FlowExercise.dll
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.pdb
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\FlowExercise.genruntimeconfig.cache
+C:\Users\jobb\source\repos\FlowExercise\FlowExercise\obj\Debug\net6.0\ref\FlowExercise.dll
