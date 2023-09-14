@@ -1,4 +1,5 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FlowExercise
 {
@@ -8,7 +9,8 @@ namespace FlowExercise
         {
             Adolescent = 80,
             Pensioner = 90,
-            Regular = 120
+            Regular = 120,
+            Free = 0
         }
 
         static void Main(string[] args)
@@ -54,9 +56,18 @@ namespace FlowExercise
             Console.WriteLine("[0] Quit");
         }
 
-        private static int AdolescentOrOPensioner(bool isCompany = false)
+        private static int AdolescentOrOPensioner(int index = -1, bool isCompany = false)
         {
-            string displayMsg = "Please enter your age:";
+            string displayMsg;
+            if(isCompany)
+            {
+                displayMsg = $"Please enter age for person {index + 1}:";
+            }
+            else
+            {
+                displayMsg = $"Please enter your age:";
+            }
+            
             int age = ShowCommandAndGetUserInput(displayMsg);
 
             return CheckAgeAndGetPrice(age, isCompany);
@@ -71,7 +82,7 @@ namespace FlowExercise
             int sum = 0;
             for (int i = 0; i < nrOfPeople; i++)
             {
-                sum += AdolescentOrOPensioner(true);
+                sum += AdolescentOrOPensioner(i, true);
             }
 
             Print($"\nNr of people: {nrOfPeople}\nTotal price: {sum} SEK\n");
@@ -95,15 +106,23 @@ namespace FlowExercise
         {
             string displayMsg = "Enter a sentence:";
             string userInput = GetUserInput(displayMsg);
+            userInput = FormatString(userInput);
 
             while (!CheckLength(userInput))
             {
-                displayMsg = "Sentence needs to be at least 3 words long.";
+                displayMsg = "Sentence needs to be at least 3 words long. Try again.";
                 userInput = GetUserInput(displayMsg);
+                userInput = FormatString(userInput);
             }
             string[] words = userInput.Split(' ');
-            Print($"The third word: {words[2]}");
+            Print($"\nThe third word: {words[2]}\n");
 
+        }
+
+        private static string FormatString(string s)
+        {
+            s = Regex.Replace(s, @"\s+", " ");
+            return s.Trim();
         }
 
         private static bool CheckLength(string userSentence)
@@ -140,7 +159,7 @@ namespace FlowExercise
             int number = ValidateNumber(input);
             while(number == -1) 
             {
-                InvalidInputForNumber();
+                number = InvalidInputForNumber();
             }
             return number;
 
@@ -150,8 +169,11 @@ namespace FlowExercise
         {
 
             int ageTypePrice;
-
-            if (age < 20)
+            if(age < 5 || age > 100) 
+            {
+                ageTypePrice = (int) AgeGroup.Free;
+            }
+            else if (age < 20)
             {
                 ageTypePrice = (int) AgeGroup.Adolescent;
             }
@@ -164,10 +186,13 @@ namespace FlowExercise
                 ageTypePrice = (int) AgeGroup.Regular;
             }
 
-            if (!isCompany)
+            var a = (AgeGroup)ageTypePrice;
+            if (!isCompany && ageTypePrice != 0)
             {
-                var a = (AgeGroup) ageTypePrice;
                 Print($"{a} price: {ageTypePrice} SEK.\n");
+            } else if(!isCompany && ageTypePrice == 0)
+            {
+                Print($"Children under 5 and centenarians: Free entrance.\n");
             }
 
             return ageTypePrice;
