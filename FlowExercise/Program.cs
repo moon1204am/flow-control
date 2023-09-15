@@ -31,12 +31,12 @@ namespace FlowExercise
                         AdolescentOrOPensioner();
                         break;
                     case "2":
-                         GetPriceForFullCompany();
+                        GetPriceForFullCompany();
                         break;
                     case "3":
                         RepeatTenTimes();
                         break;
-                     case "4":
+                    case "4":
                         TheThirdWord();
                         break;
                     default:
@@ -65,7 +65,7 @@ namespace FlowExercise
         private static int AdolescentOrOPensioner(int index = -1, bool isCompany = false)
         {
             string displayMsg;
-            if(isCompany)
+            if (isCompany)
             {
                 displayMsg = $"Please enter age for person {index + 1}:";
             }
@@ -73,7 +73,7 @@ namespace FlowExercise
             {
                 displayMsg = $"Please enter your age:";
             }
-            
+
             int age = ShowCommandAndGetUserInput(displayMsg);
 
             return CheckAgeAndGetPrice(age, isCompany);
@@ -102,15 +102,12 @@ namespace FlowExercise
         /// </summary>
         private static void RepeatTenTimes()
         {
-            Print("Enter an arbitrary text");
-            string text = GetInput();
-            while (!ValidateText(text))
+            string displayMsg = "Enter an arbitrary text";
+            string userInput = GetUserInput(displayMsg);
+
+            for (int i = 0; i < 10; i++)
             {
-                text = InvalidInputForText();
-            }
-            for(int i = 0; i < 10; i++) 
-            {
-                Print2($"{i + 1}. {text} ");
+                Print2($"{i + 1}. {userInput} ");
             }
             Print("");
         }
@@ -164,7 +161,7 @@ namespace FlowExercise
 
             if (!isCompany && ageTypePrice != 0)
             {
-                Print($"{(AgeGroup) ageTypePrice} price: {ageTypePrice} SEK.\n");
+                Print($"{(AgeGroup)ageTypePrice} price: {ageTypePrice} SEK.\n");
             }
             else if (!isCompany && ageTypePrice == 0)
             {
@@ -205,14 +202,15 @@ namespace FlowExercise
         /// </summary>
         /// <param name="message">The command for the use.r</param>
         /// <returns>The validated input.</returns>
-        private static string GetUserInput(string message)
+        private static string GetUserInput(string displayMsg)
         {
-            Print(message);
-            string input = GetInput();
-            while (!ValidateText(input))
+            string input;
+            do
             {
-                input = InvalidInputForText();
-            }
+                Print(displayMsg);
+                input = GetInput();
+            } while (!ValidateText(input));
+
             return input;
         }
 
@@ -221,16 +219,17 @@ namespace FlowExercise
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private static int ShowCommandAndGetUserInput(string message)
+        private static int ShowCommandAndGetUserInput(string displayMsg)
         {
-            Print(message);
-            string input = GetInput();
-
-            int number = ValidateNumber(input);
-            while(number == -1) 
+            string input;
+            int number;
+            do
             {
-                number = InvalidInputForNumber();
-            }
+                Print(displayMsg);
+                input = GetInput();
+                number = ValidateNumber(input);
+            } while (number == -1);
+
             return number;
 
         }
@@ -242,13 +241,13 @@ namespace FlowExercise
         /// <returns>the parsed number from string to int.</returns>
         private static int ValidateNumber(string? num)
         {
-            if(!int.TryParse(num, out int parsedNum)) 
+            if (!int.TryParse(num, out int parsedNum))
             {
                 Console.WriteLine("Not a number.\n");
                 return -1;
             }
 
-            if(parsedNum <= 0 || parsedNum > 120)
+            if (parsedNum <= 0 || parsedNum > 120)
             {
                 Console.WriteLine("Enter a valid number.\n");
                 return -1;
@@ -264,30 +263,12 @@ namespace FlowExercise
         /// <returns>true if not null or empty, otherwise false.</returns>
         private static bool ValidateText(string text)
         {
-            return !string.IsNullOrEmpty(text);
-        }
-
-        /// <summary>
-        /// If the input failed the validation, it displays it to the user and asks for input again.
-        /// </summary>
-        /// <returns>the new input by user.</returns>
-        private static int InvalidInputForNumber()
-        {
-            Print("Try again:");
-            string input = GetInput();
-            return ValidateNumber(input);
-        }
-
-        /// <summary>
-        /// If the input failed the validation, it displays it to the user and asks for input again.
-        /// </summary>
-        /// <returns>the new input by user.</returns>
-        private static string InvalidInputForText()
-        {
-            Print("Can't be empty.");
-            string sentence = GetInput();
-
-            return sentence;
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Print("Not a valid text. Try again.");
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
